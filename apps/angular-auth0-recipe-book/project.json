@@ -1,0 +1,95 @@
+{
+  "name": "angular-auth0-recipe-book",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/angular-auth0-recipe-book/src",
+  "prefix": "angular-auth0-recipe-book",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/angular-auth0-recipe-book",
+        "index": "apps/angular-auth0-recipe-book/src/index.html",
+        "main": "apps/angular-auth0-recipe-book/src/main.ts",
+        "polyfills": "apps/angular-auth0-recipe-book/src/polyfills.ts",
+        "tsConfig": "apps/angular-auth0-recipe-book/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/angular-auth0-recipe-book/src/favicon.ico",
+          "apps/angular-auth0-recipe-book/src/assets"
+        ],
+        "styles": ["apps/angular-auth0-recipe-book/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/angular-auth0-recipe-book/src/environments/environment.ts",
+              "with": "apps/angular-auth0-recipe-book/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "angular-auth0-recipe-book:build:production"
+        },
+        "development": {
+          "browserTarget": "angular-auth0-recipe-book:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "angular-auth0-recipe-book:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/angular-auth0-recipe-book/src/**/*.ts",
+          "apps/angular-auth0-recipe-book/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/angular-auth0-recipe-book"],
+      "options": {
+        "jestConfig": "apps/angular-auth0-recipe-book/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

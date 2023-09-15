@@ -1,0 +1,29 @@
+{
+  "name": "angular-auth0-recipe-book-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/angular-auth0-recipe-book-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/angular-auth0-recipe-book-e2e/cypress.json",
+        "devServerTarget": "angular-auth0-recipe-book:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "angular-auth0-recipe-book:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/angular-auth0-recipe-book-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["angular-auth0-recipe-book"]
+}
